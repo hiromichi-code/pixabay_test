@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { SearchBar } from "./components/SearchBar";
+import axios from "axios";
+import { useState } from "react";
+import { ImageList } from "./components/ImageList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	const [images, setImages] = useState([]);
+
+	const ApiKey = process.env.REACT_APP_PIXABAY_APIKEY;
+
+	const onSearchSubmit = async (term) => {
+		try {
+			const params = {
+				key: ApiKey,
+				q: term,
+			};
+			const response = await axios.get("https://pixabay.com/api/", { params });
+			setImages(response.data.hits);
+			if (response.data.total === 0) {
+				console.log("画像がありません");
+			}
+		} catch {
+			window.alert("画像の取得に失敗しました");
+		}
+	};
+	
+	return (
+		<div className="mt-24">
+			<SearchBar onSubmit={onSearchSubmit} />
+			<ImageList images={images} />
+		</div>
+	);
 }
-
-export default App;

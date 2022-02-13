@@ -1,0 +1,9 @@
+{
+	"editor.formatOnSave": true,
+	"emmet.excludeLanguages": ["markdown"],
+	"prettier.jsxBracketSameLine": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"emmet.includeLanguages": {
+		"javascript": "javascriptreact"
+	}
+}
