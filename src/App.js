@@ -2,6 +2,7 @@ import { SearchBar } from "./components/SearchBar";
 import axios from "axios";
 import { useState } from "react";
 import { ImageList } from "./components/ImageList";
+import logo from "./logo.png";
 
 export default function App() {
 	const [images, setImages] = useState([]);
@@ -23,9 +24,12 @@ export default function App() {
 			window.alert("画像の取得に失敗しました");
 		}
 	};
-	
+
 	return (
 		<div className="mt-24">
+			<div className="w-5/6 mx-auto mb-2">
+				<img src={logo} alt="ロゴマーク" className="w-32" />
+			</div>
 			<SearchBar onSubmit={onSearchSubmit} />
 			<ImageList images={images} />
 		</div>
